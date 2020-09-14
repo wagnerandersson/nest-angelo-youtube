@@ -16,19 +16,18 @@
     <img alt="Repository pulls" src="https://img.shields.io/github/issues-pr/angelogluz/nest-angelo-youtube.svg">
   </a>
     <a href="https://github.com/angelogluz/Youtube-codes/blob/master/LICENSE">
-    <img alt="Repository LICENSE" src="https://img.shields.io/github/license/angelogluz/nest-angelo-youtube">
+    <img alt="Repository LICENSE" src="https://img.shields.io/github/license/angelogluz/nest-angelo-youtube.svg">
   </a>
 </p>
 
 
-## Pré requisitos
+## 🔐 Pré requisitos
 
 <a href="https://www.docker.com/">Docker</a> &nbsp;
   
 <a href="https://docs.docker.com/compose/install/">Docker-compose</a> &nbsp;
 
-## Aulas
-
+## 📹 Aulas
 <a href="https://youtu.be/Yr4GszcuLHI">Aula 01 - Entendendo GraphQL</a> &nbsp;
 
 <a href="https://youtu.be/tVQwV-c19RU">Aula 02 - Criando aplicação Nest/GraphQL</a> &nbsp;
