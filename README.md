@@ -66,7 +66,7 @@ $ npm run test:cov
 ## 🤔 Como contribuir
 Veja os detalhes de como contribuir [aqui](https://github.com/angelogluz/nest-angelo-youtube/blob/master/CONTRIBUTING.md).
 
-## 🤝 Contributors
+## 🤝 Contribuídores
 
 <a href="https://github.com/angelogluz"><img src="https://github.com/angelogluz.png" width="45" height="45"></a> &nbsp;
 <a href="https://github.com/javielrezende"><img src="https://github.com/javielrezende.png" width="45" height="45"></a> &nbsp;
