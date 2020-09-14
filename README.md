@@ -1,11 +1,11 @@
 <p align="center">
-  <a target="blank"><img src="https://yt3.ggpht.com/HdaCcqwPt7hWyAwVwbPNPLEXtCT5Y9r3D4DEjDOvelWcBhXXj7wFSBn3YdOZcWi7CxSgjjkHVw=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" width="320" alt="Nest Logo" /></a>
-
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
  
   <p align="center">Projeto de estudos gerado a partir dos vídeos do <a href="https://youtube.com/angelogluz" target="blank">Canal do Youtube</a>.</p>
     <p align="center">
 <a href="https://github.com/angelogluz/nest-angelo-youtube/stargazers"><img src="https://img.shields.io/github/stars/angelogluz/nest-angelo-youtube" alt="Stars" /></a>
+
   <a href="https://github.com/angelogluz/nest-angelo-youtube/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/angelogluz/nest-angelo-youtube.svg">
   </a>
@@ -30,8 +30,11 @@
 ## Aulas
 
 <a href="https://youtu.be/Yr4GszcuLHI">Aula 01 - Entendendo GraphQL</a> &nbsp;
-<a href="hhttps://youtu.be/tVQwV-c19RU">Aula 02 - Criando aplicação Nest/GraphQL do zero</a> &nbsp;
+
+<a href="https://youtu.be/tVQwV-c19RU">Aula 02 - Criando aplicação Nest/GraphQL</a> &nbsp;
+
 <a href="https://youtu.be/RIyZEC76a98">Aula 03 - Dockerizando a aplicação</a> &nbsp;
+
 <a href="https://youtu.be/WIDyF390dEE">Aula 04 - Testes unitários, mocks e cobertura de testes com Jest</a> &nbsp;
 
 ## Para que o Typescript funcione no Host apropriadamente instale as dependências
