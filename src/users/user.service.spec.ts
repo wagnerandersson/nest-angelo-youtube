@@ -47,7 +47,7 @@ describe('UserService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('findAllUsers', () => {
+  describe('When search All Users', () => {
     it('should be list all users', async () => {
       const user = TestUtil.giveAMeAValidUser();
       mockRepository.find.mockReturnValue([user, user]);
@@ -57,7 +57,7 @@ describe('UserService', () => {
     });
   });
 
-  describe('findUserById', () => {
+  describe('When serch User By Id', () => {
     it('should find a existing user', async () => {
       const user = TestUtil.giveAMeAValidUser();
       mockRepository.findOne.mockReturnValue(user);
@@ -73,7 +73,7 @@ describe('UserService', () => {
       expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
     });
   });
-  describe('create user', () => {
+  describe('When create user', () => {
     it('should create a user', async () => {
       const user = TestUtil.giveAMeAValidUser();
       mockRepository.save.mockReturnValue(user);
@@ -84,7 +84,6 @@ describe('UserService', () => {
       expect(mockRepository.create).toBeCalledTimes(1);
       expect(mockRepository.save).toBeCalledTimes(1);
     });
-  });
   it('should return a exception when doesnt create a user', async () => {
     const user = TestUtil.giveAMeAValidUser();
     mockRepository.save.mockReturnValue(null);
@@ -99,8 +98,8 @@ describe('UserService', () => {
     expect(mockRepository.create).toBeCalledTimes(1);
     expect(mockRepository.save).toBeCalledTimes(1);
   });
-
-  describe('updateUser', () => {
+});
+  describe('When update User', () => {
     it('Should update a user', async () => {
       const user = TestUtil.giveAMeAValidUser();
       const updatedUser = { name: 'Nome Atualizado' };
@@ -126,7 +125,7 @@ describe('UserService', () => {
     });
   });
 
-  describe('deleteUser', () => {
+  describe('When delete User', () => {
     it('Should delete a existing user', async () => {
       const user = TestUtil.giveAMeAValidUser();
       mockRepository.delete.mockReturnValue(user);
