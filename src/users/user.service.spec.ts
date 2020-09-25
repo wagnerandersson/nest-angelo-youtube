@@ -2,9 +2,10 @@ import {
   NotFoundException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { User } from './user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Test, TestingModule } from '@nestjs/testing';
+
+import { User } from './user.entity';
 import { UserService } from './user.service';
 import TestUtil from './../common/test/TestUtil';
 
