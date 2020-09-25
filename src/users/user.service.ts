@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './user.entity';
 import { Repository } from 'typeorm';
+
+import { User } from './user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 
@@ -13,8 +14,7 @@ export class UserService {
     ) {}
 
     async findAllUsers(): Promise<User[]> {
-        const users = await this.userRepository.find();        
-        return users;
+        return await this.userRepository.find();        
     }
 
     async findUserById(id: string): Promise<User> {
@@ -26,35 +26,25 @@ export class UserService {
     }
 
     async createUser(data: CreateUserInput): Promise<User> {
-        const user = this.userRepository.create(data);
-        const userSaved = await this.userRepository.save(user);
-        
-        if(!userSaved) {
-            throw new InternalServerErrorException('Problem to create a user. Try again');
-        }
-
-        return userSaved;
+        return this.userRepository.create(data);
     }
 
-    async updateUser(id: string, data: UpdateUserInput): Promise<User> {
-        const user = await this.findUserById(id);
-
-        await this.userRepository.update(user, { ...data });
-
-        const userUpdated = this.userRepository.create({ ...user, ...data })
-        
-        return userUpdated;
+    async updateUser(user: User, data: UpdateUserInput): Promise<User> {
+        return await this.createUser({ ...user, ...data })
     }
 
-    async deleteUser(id: string): Promise<boolean> {
-        const user = await this.findUserById(id);
-
-        const deleted = await this.userRepository.delete(user);
-        
-        if(deleted) {
-            return true;
+    async deleteUser(user: User): Promise<void> {
+        const userDeleted = await this.userRepository.delete(user);
+        if(!userDeleted) {
+          throw new InternalServerErrorException('Problem to delete a user. Try again');
         }
+    }
 
-        return false;
+    async saveUser(user: User): Promise<User> {
+      const userSaved = this.userRepository.save(user);
+      if(!userSaved) {
+        throw new InternalServerErrorException('Problem to create a user. Try again');
+      }
+      return userSaved
     }
 }
