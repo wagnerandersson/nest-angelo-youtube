@@ -43,7 +43,7 @@ export class UserService {
     async saveUser(user: User): Promise<User> {
       const userSaved = this.userRepository.save(user);
       if(!userSaved) {
-        throw new InternalServerErrorException('Problem to create a user. Try again');
+        throw new InternalServerErrorException('Problem to create/update a user. Try again');
       }
       return userSaved
     }
