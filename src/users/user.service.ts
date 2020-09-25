@@ -41,10 +41,11 @@ export class UserService {
     }
 
     async saveUser(user: User): Promise<User> {
-        const userSaved = await this.userRepository.save(user);
-        if(!userSaved) {
+        try {
+          const userSaved = await this.userRepository.save(user);
+          return userSaved
+        } catch {
           throw new InternalServerErrorException('Problem to create/update a user. Try again');
         }
-        return userSaved
     }
 }
