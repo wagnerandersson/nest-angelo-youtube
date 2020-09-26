@@ -55,7 +55,7 @@ describe('UserService', () => {
       expect(mockRepository.findOne).toHaveBeenCalledWith(mockUserModel.id)
       expect(userFound).resolves.toBe(mockUserModel)
     });
-    it('should return a exception when does not to find a user', async () => {
+    it('Should return a exception when does not to find a user', async () => {
       mockRepository.findOne.mockReturnValue(null);
 
       const user = service.findUserById('3')
