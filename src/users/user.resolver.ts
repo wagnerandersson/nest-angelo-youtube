@@ -20,7 +20,7 @@ export class UserResolver {
     async user(
         @Args('id') id: string
     ): Promise<User> {
-        return this.userService.findUserById(id);
+        return this.userService.getUserById(id);
     }
 
     @Mutation(() => User)
@@ -37,7 +37,7 @@ export class UserResolver {
         @Args('id') id: string,
         @Args('data') data: UpdateUserInput
     ): Promise<User> {
-        const user = await this.userService.findUserById(id);
+        const user = await this.userService.getUserById(id);
         const userUpdated = await this.userService.updateUser(user, data);
         await this.userService.saveUser(userUpdated);
         return userUpdated;
@@ -47,7 +47,7 @@ export class UserResolver {
     async deleteUser(
         @Args('id') id: string
     ): Promise<boolean> {
-        const user = await this.userService.findUserById(id)
+        const user = await this.userService.getUserById(id)
         await this.userService.deleteUser(user);
         return true;
     }

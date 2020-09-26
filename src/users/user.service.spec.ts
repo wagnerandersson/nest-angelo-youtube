@@ -50,7 +50,7 @@ describe('UserService', () => {
 
   describe('When search User By Id', () => {
     it('Should find a existing user', async () => {
-      const userFound = service.findUserById('1');
+      const userFound = service.getUserById('1');
 
       expect(mockRepository.findOne).toHaveBeenCalledWith(mockUserModel.id)
       expect(userFound).resolves.toBe(mockUserModel)
@@ -58,7 +58,7 @@ describe('UserService', () => {
     it('Should return a exception when does not to find a user', async () => {
       mockRepository.findOne.mockReturnValue(null);
 
-      const user = service.findUserById('3')
+      const user = service.getUserById('3')
 
       expect(user).rejects.toThrow(NotFoundException);
       expect(mockRepository.findOne).toHaveBeenCalledWith('3');
