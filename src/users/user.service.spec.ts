@@ -21,7 +21,7 @@ describe('UserService', () => {
     delete: jest.fn().mockReturnValue(null),
   };
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UserService,
@@ -33,15 +33,6 @@ describe('UserService', () => {
     }).compile();
 
     service = module.get<UserService>(UserService);
-  });
-
-  beforeEach(() => {
-    mockRepository.find.mockReset();
-    mockRepository.findOne.mockReset();
-    mockRepository.create.mockReset();
-    mockRepository.save.mockReset();
-    mockRepository.update.mockReset();
-    mockRepository.delete.mockReset();
   });
 
   it('should be defined', () => {
