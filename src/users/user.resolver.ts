@@ -27,28 +27,21 @@ export class UserResolver {
     async createUser(
         @Args('data') data: CreateUserInput
     ): Promise<User> {
-        const user = await this.userService.createUser(data);
-        await this.userService.saveUser(user)
-        return user;
+        return this.userService.createUser(data);
     }
 
     @Mutation(() => User)
     async updateUser(
-        @Args('id') id: string,
         @Args('data') data: UpdateUserInput
     ): Promise<User> {
-        const user = await this.userService.getUserById(id);
-        const userUpdated = await this.userService.updateUser(user, data);
-        await this.userService.saveUser(userUpdated);
-        return userUpdated;
+        return this.userService.updateUser(data)
     }
 
     @Mutation(() => Boolean)
     async deleteUser(
         @Args('id') id: string
     ): Promise<boolean> {
-        const user = await this.userService.getUserById(id)
-        await this.userService.deleteUser(user);
+        await this.userService.deleteUser(id);
         return true;
     }
 }

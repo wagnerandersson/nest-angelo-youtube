@@ -19,28 +19,29 @@ export class UserService {
 
     async getUserById(id: string): Promise<User> {
         const user = await this.userRepository.findOne(id);    
-        if(!user) {
-            throw new NotFoundException('User not found');
-        }    
+        if(!user) throw new NotFoundException('User not found');
         return user;
     }
 
     async createUser(data: CreateUserInput): Promise<User> {
-        return this.userRepository.create(data);
+        const user = this.userRepository.create(data);
+        return this.saveUser(user)
     }
 
-    async updateUser(user: User, data: UpdateUserInput): Promise<User> {
-        return await this.createUser({ ...user, ...data })
+    async updateUser(data: UpdateUserInput): Promise<User> {
+        const user = await this.getUserById(data.id)
+        return this.saveUser(user)
     }
 
-    async deleteUser(user: User): Promise<void> {
+    async deleteUser(id: string): Promise<void> {
+        const user = await this.getUserById(id)
         const userDeleted = await this.userRepository.delete(user);
         if(!userDeleted) {
           throw new InternalServerErrorException('Problem to delete a user. Try again');
         }
     }
 
-    async saveUser(user: User): Promise<User> {
+    private async saveUser(user: User): Promise<User> {
         try {
           const userSaved = await this.userRepository.save(user);
           return userSaved

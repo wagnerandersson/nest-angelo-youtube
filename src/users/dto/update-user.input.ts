@@ -3,6 +3,9 @@ import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class UpdateUserInput {
+    @IsString()
+    id: string
+
     @IsOptional()
     @IsString()
     @IsNotEmpty({message: 'Invalid characters'})
