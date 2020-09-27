@@ -18,7 +18,7 @@ describe('UserService', () => {
     create: jest.fn().mockReturnValue(mockUserModel),
     save: jest.fn().mockReturnValue(mockUserModel),
     update: jest.fn().mockReturnValue(mockUpdatedUserModel),
-    delete: jest.fn().mockReturnValue(null),
+    delete: jest.fn().mockReturnValue({ affected: 1 }),
   };
 
   beforeEach(async () => {
@@ -76,42 +76,48 @@ describe('UserService', () => {
 
   describe('When update User', () => {
     it('Should update a user', async () => {
-      service.createUser = jest.fn()
+      service.getUserById = jest.fn().mockReturnValueOnce(mockUserModel)
 
-      const userUpdated = service.updateUser(mockUserModel, mockUpdateUserParams)
+      const userUpdated = service.updateUser(mockUpdateUserParams)
 
-      expect(service.createUser).toHaveBeenCalledWith({ ...mockUserModel, ...mockUpdateUserParams });
+      expect(service.getUserById).toHaveBeenCalledWith(mockUpdateUserParams.id);
       expect(userUpdated).resolves.toBe(mockUpdatedUserModel)
     });
 
     describe('When delete User', () => {
       it('Should delete a existing user', async () => {
-        mockRepository.delete.mockReturnValue({ affected: 1 })
+        service.getUserById = jest.fn().mockReturnValueOnce(mockUserModel)
 
-        await service.deleteUser(mockUserModel);
+        await service.deleteUser('1');
 
+        expect(service.getUserById).toHaveBeenCalledWith('1')
         expect(mockRepository.delete).toBeCalledWith(mockUserModel);
       });
 
       it('Should return an internal server error if repository does not delete the user', async () => {
-        mockRepository.delete.mockReturnValue(null);
+        service.getUserById = jest.fn().mockReturnValueOnce(mockUserModel)
+        mockRepository.delete.mockReturnValueOnce(null)
 
-        expect(service.deleteUser(mockUserModel)).rejects.toThrow(InternalServerErrorException)
+        const deletedUser = service.deleteUser('1');
 
+        expect(service.getUserById).toHaveBeenCalledWith('1')
         expect(mockRepository.delete).toBeCalledWith(mockUserModel);
+        expect(deletedUser).rejects.toThrow(InternalServerErrorException)
       })
     });
 
     describe('When save a user', () => {
       it('Should save a user with valid data', async () => {
-        expect(service.saveUser(mockUserModel)).resolves.toBe(mockUserModel)
+        // workaround to test private methods using typescript
+        expect(service["saveUser"](mockUserModel)).resolves.toBe(mockUserModel)
 
         expect(mockRepository.save).toHaveBeenCalledWith(mockUserModel)
       })
       it('Should return an internal server error if repository does not save the user', async () => {
         mockRepository.save.mockRejectedValue('Generic error')
         
-        expect(service.saveUser(mockUserModel)).rejects.toThrow(InternalServerErrorException)
+        // workaround to test private methods using typescript
+        expect(service["saveUser"](mockUserModel)).rejects.toThrow(InternalServerErrorException)
 
         expect(mockRepository.save).toHaveBeenCalledWith(mockUserModel)
       })
