@@ -32,7 +32,7 @@ export class UserService {
 
     async updateUser(data: UpdateUserInput): Promise<User> {
         const user = await this.getUserById(data.id);
-        return this.saveUser({...user, ...data});
+        return this.userRepository.save({...user, ...data})
     }
 
     async deleteUser(id: string): Promise<void> {
