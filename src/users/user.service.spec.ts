@@ -35,12 +35,12 @@ describe('UserService', () => {
     service = module.get<UserService>(UserService);
   });
 
-  it('should be defined', () => {
+  it('Should be defined', () => {
     expect(service).toBeDefined();
   });
 
   describe('When search all Users', () => {
-    it('should list all users', async () => {
+    it('Should list all users', async () => {
       const users = service.findAllUsers();
 
       expect(users).resolves.toBe(mockUserArrayModel)
