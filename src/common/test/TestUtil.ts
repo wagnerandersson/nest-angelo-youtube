@@ -8,6 +8,7 @@ export const mockAddAccountParams: CreateUserInput = {
 };
 
 export const mockUpdateUserParams: UpdateUserInput = {
+  id: '1',
   email: 'email-updated@email.com'
 }
 
