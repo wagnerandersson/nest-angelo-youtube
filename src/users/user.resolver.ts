@@ -11,9 +11,11 @@ export class UserResolver {
     private readonly userService: UserService
   ) { }
 
-  @Query(() => [User])
-  async users(): Promise<User[]> {
-    return await this.userService.findAllUsers();
+  @Mutation(() => User)
+  async createUser(
+    @Args('data') data: CreateUserInput
+  ): Promise<User> {
+    return this.userService.createUser(data);
   }
 
   @Query(() => User)
@@ -23,11 +25,9 @@ export class UserResolver {
     return this.userService.getUserById(id);
   }
 
-  @Mutation(() => User)
-  async createUser(
-    @Args('data') data: CreateUserInput
-  ): Promise<User> {
-    return this.userService.createUser(data);
+  @Query(() => [User])
+  async users(): Promise<User[]> {
+    return await this.userService.findAllUsers();
   }
 
   @Mutation(() => User)
