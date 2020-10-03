@@ -70,6 +70,7 @@ describe('UserService', () => {
       const user = service.createUser(mockAddAccountParams)
 
       expect(mockRepository.create).toBeCalledWith(mockAddAccountParams);
+      expect(mockRepository.save).toBeCalledTimes(1);
       expect(user).resolves.toBe(mockUserModel)
     });
   });
