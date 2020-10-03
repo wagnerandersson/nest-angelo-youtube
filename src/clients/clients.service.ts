@@ -2,8 +2,9 @@ import { Injectable, NotFoundException, InternalServerErrorException } from '@ne
 import { InjectRepository } from '@nestjs/typeorm';
 import { Clients } from './clients.entity';
 import { Repository } from 'typeorm';
-import { CreateClientInput } from './clients/dto/create-clients.input';
-import { UpdateClientInput } from './clients/dto/update-clients.input';
+import { UpdateClientInput } from './dto/update-client.input';
+import { CreateClientInput } from './dto/create-client.input';
+
 
 
 @Injectable()

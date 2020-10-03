@@ -17,12 +17,12 @@ export class Clients {
     @Column()
     email: string;
 
-    @Column()
-    createdAt: number;
+    @Column({ name: 'created_At' })
+    createdAt: Date;
 
-    @Column()
-    updatedAt: number;
+    @Column({ name: 'updated_At' })
+    updatedAt: Date;
 
-    @Column()
-    deletedAt: number;
+    @Column({ name: 'deleted_At' })
+    deletedAt: Date;
 }
