@@ -13,17 +13,8 @@ export class UserService {
     private userRepository: Repository<User>
   ) { }
 
-  private async saveUser(user: User): Promise<User> {
-    try {
-      return await this.userRepository.save(user);
-    } catch {
-      throw new InternalServerErrorException('Problem to create/update a user. Try again');
-    }
-  }
-
   async createUser(data: CreateUserInput): Promise<User> {
-    const user = this.userRepository.create(data);
-    return this.saveUser(user);
+    return this.userRepository.create(data);
   }
 
   async getUserById(id: string): Promise<User> {
@@ -47,7 +38,7 @@ export class UserService {
     const user = await this.getUserById(id);
     const userDeleted = await this.userRepository.delete(user);
     if (!userDeleted) {
-      throw new InternalServerErrorException('Problem to delete a user. Try again');
+      throw new InternalServerErrorException();
     }
   }
 }

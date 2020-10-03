@@ -105,22 +105,5 @@ describe('UserService', () => {
         expect(deletedUser).rejects.toThrow(InternalServerErrorException)
       })
     });
-
-    describe('When save a user', () => {
-      it('Should save a user with valid data', async () => {
-        // workaround to test private methods using typescript
-        expect(service["saveUser"](mockUserModel)).resolves.toBe(mockUserModel)
-
-        expect(mockRepository.save).toHaveBeenCalledWith(mockUserModel)
-      })
-      it('Should return an internal server error if repository does not save the user', async () => {
-        mockRepository.save.mockRejectedValue('Generic error')
-        
-        // workaround to test private methods using typescript
-        expect(service["saveUser"](mockUserModel)).rejects.toThrow(InternalServerErrorException)
-
-        expect(mockRepository.save).toHaveBeenCalledWith(mockUserModel)
-      })
-    })
   })
 })
