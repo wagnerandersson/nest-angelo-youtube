@@ -7,6 +7,10 @@ export class CreateClientInput {
     @IsNotEmpty({message: 'Invalid characters'})
     name: string;
 
+    @IsString()
+    @IsNotEmpty({message: 'Invalid characters'})
+    phone: string;
+
     @IsEmail()
     @IsNotEmpty({message: 'Invalid E-mail'})
     email: string;

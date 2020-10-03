@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from "@nestjs/graphql";
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
 
 @ObjectType()
 @Entity()
@@ -12,17 +12,17 @@ export class Clients {
     name: string;
 
     @Column()
-    phone: number;
+    phone: string;
 
     @Column()
     email: string;
 
-    @Column({ name: 'created_At' })
+    @CreateDateColumn({ name: 'created_At' })
     createdAt: Date;
 
-    @Column({ name: 'updated_At' })
+    @UpdateDateColumn({ name: 'updated_At' })
     updatedAt: Date;
 
-    @Column({ name: 'deleted_At' })
+    @DeleteDateColumn({ name: 'deleted_At' })
     deletedAt: Date;
 }
