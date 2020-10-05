@@ -32,7 +32,7 @@ export class ClientsService {
         const ClientSaved = await this.clientRepository.save(client);
     
         if(!ClientSaved) {
-            throw new InternalServerErrorException('Problem to create a client. Try again');
+            throw new InternalServerErrorException('Problema na criação de cliente');
         }
 
         return ClientSaved;
