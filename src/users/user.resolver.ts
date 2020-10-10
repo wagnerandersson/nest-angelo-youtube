@@ -4,6 +4,16 @@ import { User } from './user.entity';
 import { UserService } from './user.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { env } from 'process';
+
+
+import * as NodeRSA from 'node-rsa';
+
+
+
+let private_key = env.private_key;
+const key_private = new NodeRSA(private_key);
+
 
 @Resolver('User')
 export class UserResolver {
@@ -14,6 +24,10 @@ export class UserResolver {
     @Query(() => [User])
     async users(): Promise<User[]> {
         const users = await this.userService.findAllUsers();
+        users.map(el => {
+            el.name = key_private.decrypt(el.name, 'utf8');
+            el.email = key_private.decrypt(el.email, 'utf8');
+        });
         return users;
     }
 
@@ -21,7 +35,9 @@ export class UserResolver {
     async user(
         @Args('id') id: string
     ): Promise<User> {
-        const user = this.userService.findUserById(id);
+        const user = await this.userService.findUserById(id);
+        user.name = key_private.decrypt(user.name, 'utf8');
+        user.email = key_private.decrypt(user.email, 'utf8');
         return user;
     }
 
