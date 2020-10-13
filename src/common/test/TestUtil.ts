@@ -9,8 +9,8 @@ export const mockAddAccountParams: CreateUserInput = {
 
 export const mockUpdateUserParams: UpdateUserInput = {
   id: '1',
-  email: 'email-updated@email.com'
-}
+  email: 'email-updated@email.com',
+};
 
 export const mockUserModel: User = {
   id: '1',
@@ -19,8 +19,8 @@ export const mockUserModel: User = {
 
 export const mockUpdatedUserModel: User = {
   ...mockUserModel,
-  email: 'updated-email@email.com'
-}
+  email: 'updated-email@email.com',
+};
 
 export const mockUserArrayModel: User[] = [
   mockUserModel,

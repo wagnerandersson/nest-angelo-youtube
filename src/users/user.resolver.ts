@@ -7,21 +7,15 @@ import { UpdateUserInput } from './dto/update-user.input';
 
 @Resolver('User')
 export class UserResolver {
-  constructor(
-    private readonly userService: UserService
-  ) { }
+  constructor(private readonly userService: UserService) {}
 
   @Mutation(() => User)
-  async createUser(
-    @Args('data') data: CreateUserInput
-  ): Promise<User> {
+  async createUser(@Args('data') data: CreateUserInput): Promise<User> {
     return this.userService.createUser(data);
   }
 
   @Query(() => User)
-  async user(
-    @Args('id') id: string
-  ): Promise<User> {
+  async user(@Args('id') id: string): Promise<User> {
     return this.userService.getUserById(id);
   }
 
@@ -39,9 +33,7 @@ export class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteUser(
-    @Args('id') id: string
-  ): Promise<true> {
+  async deleteUser(@Args('id') id: string): Promise<true> {
     await this.userService.deleteUser(id);
     return true;
   }
