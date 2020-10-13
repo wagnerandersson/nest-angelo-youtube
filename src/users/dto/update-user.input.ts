@@ -4,8 +4,9 @@ import { IsEmail, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validat
 @InputType()
 export class UpdateUserInput {
     @IsString()
+  @IsOptional()
     @IsUUID()
-    id: string
+  id?: string;
 
     @IsOptional()
     @IsString()

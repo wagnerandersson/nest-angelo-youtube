@@ -33,7 +33,7 @@ export class UserResolver {
   @Mutation(() => User)
   async updateUser(
     @Args('id') id: string,
-    @Args('data') data: Omit<UpdateUserInput, "id">
+    @Args('data') data: UpdateUserInput,
   ): Promise<User> {
     return this.userService.updateUser({ id, ...data });
   }
