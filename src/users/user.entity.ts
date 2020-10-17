@@ -4,19 +4,16 @@ import { env } from 'process';
 
 import * as NodeRSA from 'node-rsa';
 
-// const key = new NodeRSA({ b: 1024});
-
 let public_key = env.public_key;
 
  const key_public:NodeRSA = new NodeRSA(public_key);
 
-
 @ObjectType()
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    @Field(() => ID)
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => ID)
+  id: string;
 
     @Column({
         transformer: {

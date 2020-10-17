@@ -9,17 +9,12 @@ import { env } from 'process';
 
 import * as NodeRSA from 'node-rsa';
 
-
-
 let private_key = env.private_key;
 const key_private = new NodeRSA(private_key);
 
-
 @Resolver('User')
 export class UserResolver {
-    constructor(
-        private userService: UserService
-    ){}
+  constructor(private readonly userService: UserService) {}
 
     @Query(() => [User])
     async users(): Promise<User[]> {
@@ -41,28 +36,23 @@ export class UserResolver {
         return user;
     }
 
-    @Mutation(() => User)
-    async createUser(
-        @Args('data') data: CreateUserInput
-    ): Promise<User> {
-        const user = await this.userService.createUser(data);
-        return user;
-    }
 
-    @Mutation(() => User)
-    async updateUser(
-        @Args('id') id: string,
-        @Args('data') data: UpdateUserInput
-    ): Promise<User> {
-        const user = this.userService.updateUser(id, data);
-        return user;
-    }
+  @Query(() => [User])
+  async users(): Promise<User[]> {
+    return await this.userService.findAllUsers();
+  }
 
-    @Mutation(() => Boolean)
-    async deleteUser(
-        @Args('id') id: string
-    ): Promise<boolean> {
-        const deleted = await this.userService.deleteUser(id);
-        return deleted;
-    }
+  @Mutation(() => User)
+  async updateUser(
+    @Args('id') id: string,
+    @Args('data') data: UpdateUserInput,
+  ): Promise<User> {
+    return this.userService.updateUser({ id, ...data });
+  }
+
+  @Mutation(() => Boolean)
+  async deleteUser(@Args('id') id: string): Promise<true> {
+    await this.userService.deleteUser(id);
+    return true;
+  }
 }
