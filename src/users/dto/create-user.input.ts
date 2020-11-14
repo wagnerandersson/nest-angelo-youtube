@@ -10,4 +10,8 @@ export class CreateUserInput {
   @IsEmail()
   @IsNotEmpty({ message: 'Invalid E-mail' })
   email: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Password required' })
+  pass: string;
 }
