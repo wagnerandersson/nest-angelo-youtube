@@ -27,7 +27,7 @@ export default class TestUtil {
 export const mockAddAccountParams: CreateUserInput = {
   name: 'Test User',
   email: 'user@email.com',
-  pass: '654',
+  pass: '123456',
 };
 
 export const mockUpdateUserParams: UpdateUserInput = {
