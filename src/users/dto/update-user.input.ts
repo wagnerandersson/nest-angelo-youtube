@@ -24,8 +24,8 @@ export class UpdateUserInput {
   @IsNotEmpty({ message: 'Invalid E-mail' })
   email?: string;
 
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty({ message: 'Password is required' })
-  pass?: string;
+  // @IsOptional()
+  // @IsString()
+  // @IsNotEmpty({ message: 'Password is required' })
+  // pass?: string;
 }

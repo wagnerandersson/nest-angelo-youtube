@@ -21,6 +21,7 @@ export class ClientsResolver {
       el.name = key_private.decrypt(el.name, 'utf8');
       el.phone = key_private.decrypt(el.phone, 'utf8');
       el.email = key_private.decrypt(el.email, 'utf8');
+      el.pass = key_private.decrypt(el.pass, 'utf8');
     });
     return clients;
   }

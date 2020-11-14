@@ -6,9 +6,9 @@ module.exports = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   entities: ['dist/**/*.entity{.ts,.js}'],
-  synchronize: process.env.DB_SYNC == 'false',
+  synchronize: process.env.DB_SYNC == 'true',
   migrations: ['./src/database/migrations/**/*.ts'],
   cli: {
-    migrationsDir: ['src/database/migrations/'],
+    migrationsDir: ['./src/database/migrations/'],
   },
 };

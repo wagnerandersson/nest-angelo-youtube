@@ -31,11 +31,13 @@ export class User {
   })
   email: string;
 
-  @Column({
-    transformer: {
-      to: (value: string) => key_public.encrypt(value, 'base64'),
-      from: (value: string) => value,
-    },
-  })
-  pass: string;
+  // @Column()
+  // pass: string;
 }
+
+// {
+//   transformer: {
+//     to: (value: string) => key_public.encrypt(value, 'base64'),
+//     from: (value: string) => value,
+//   },
+// }
