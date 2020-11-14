@@ -9,6 +9,7 @@ export default class TestUtil {
     user.email = 'valid@email.com';
     user.name = 'Angelo Luz';
     user.id = '1';
+    user.pass = '123456';
     return user;
   }
 
@@ -16,7 +17,7 @@ export default class TestUtil {
     const client = new Clients();
     client.id = '1';
     client.name = 'Lázaro Pereira';
-    client.phone = '53-98802937'
+    client.phone = '53-98802937';
     client.email = 'lazaro@gmail.com';
     return client;
   }
@@ -25,6 +26,7 @@ export default class TestUtil {
 export const mockAddAccountParams: CreateUserInput = {
   name: 'Test User',
   email: 'user@email.com',
+  pass: '123456',
 };
 
 export const mockUpdateUserParams: UpdateUserInput = {
@@ -48,10 +50,12 @@ export const mockUserArrayModel: User[] = [
     id: '2',
     name: 'Test User 2',
     email: 'email2@email.com',
+    pass: '123456',
   },
   {
     id: '3',
     name: 'Test User 3',
     email: 'email3@email.com',
+    pass: '123456',
   },
 ];

@@ -9,6 +9,6 @@ module.exports = {
   synchronize: process.env.DB_SYNC == 'false',
   migrations: ['./src/database/migrations/**/*.ts'],
   cli: {
-    migrationsDir: ['src/database/migrations/'],
+    migrationsDir: ['./src/database/migrations/'],
   },
 };
