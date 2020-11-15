@@ -1,4 +1,4 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID, HideField } from '@nestjs/graphql';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -45,7 +45,14 @@ export class Clients {
   })
   email: string;
 
-  @Column({ name: 'password' })
+  @Column({
+    name: 'password',
+    transformer: {
+      to: (value: string) => key_public.encrypt(value, 'base64'),
+      from: (value: string) => value,
+    },
+  })
+  @HideField()
   pass: string;
 
   @CreateDateColumn({ name: 'created_At' })
