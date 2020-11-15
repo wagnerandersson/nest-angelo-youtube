@@ -21,6 +21,7 @@ export class CreateClientInput {
   @IsNotEmpty({ message: 'Invalid E-mail' })
   email: string;
 
+  @IsString()
   @MinLength(6, { message: 'Password too short: minimum 6 characteres.' })
   @MaxLength(10, { message: 'Password too long: maximum 10 characteres. ' })
   @IsNotEmpty({ message: 'Please create a password' })

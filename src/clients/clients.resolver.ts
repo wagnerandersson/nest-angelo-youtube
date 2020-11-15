@@ -31,4 +31,20 @@ export class ClientsResolver {
     const clients = await this.clientsService.createClient(data);
     return clients;
   }
+
+  @Query(() => Clients)
+  async clientByEmail(@Args('email') email: string): Promise<Clients> {
+    const clients = await this.clientsService.findAllClients();
+    clients.map(el => {
+      el.name = key_private.decrypt(el.name, 'utf8');
+      el.phone = key_private.decrypt(el.phone, 'utf8');
+      el.email = key_private.decrypt(el.email, 'utf8');
+      el.pass = key_private.decrypt(el.pass, 'utf8');
+    });
+
+    const findMail = clients.find(el => (el.email = email));
+    console.log(findMail);
+
+    return findMail;
+  }
 }

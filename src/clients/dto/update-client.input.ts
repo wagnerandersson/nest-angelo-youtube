@@ -20,8 +20,10 @@ export class UpdateClientInput {
   @IsNotEmpty({ message: 'Invalid E-mail' })
   email?: string;
 
+  @IsOptional()
+  @IsString()
   @MinLength(6, { message: 'Password too short: minimum 6 characteres.' })
   @MaxLength(10, { message: 'Password too long: maximum 10 characteres. ' })
-  @IsNotEmpty({ message: 'Please create a password' })
-  pass: string;
+  @IsNotEmpty({ message: 'Please create a new password' })
+  pass?: string;
 }

@@ -21,6 +21,14 @@ export class ClientsService {
     return clients;
   }
 
+  async getClientByEmail(email: string): Promise<Clients> {
+    const client = await this.clientRepository.findOne({ where: { email } });
+    if (!client) {
+      throw new NotFoundException('Client not found');
+    }
+    return client;
+  }
+
   async findClientsById(id: string): Promise<Clients> {
     const client = await this.clientRepository.findOne(id);
     if (!client) {
