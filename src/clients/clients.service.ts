@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Clients } from './clients.entity';
-import { Repository } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
 import { UpdateClientInput } from './dto/update-client.input';
 import { CreateClientInput } from './dto/create-client.input';
 
@@ -17,7 +17,9 @@ export class ClientsService {
   ) {}
 
   async findAllClients(): Promise<Clients[]> {
-    const clients = await this.clientRepository.find();
+    const clients = await this.clientRepository.find({
+      cache: { id: 'listClients', milliseconds: 15000 },
+    });
     return clients;
   }
 
@@ -40,6 +42,7 @@ export class ClientsService {
   async createClient(data: CreateClientInput): Promise<Clients> {
     const client = this.clientRepository.create(data);
     const ClientSaved = await this.clientRepository.save(client);
+    await getConnection().queryResultCache.remove(['listClients']);
 
     if (!ClientSaved) {
       throw new InternalServerErrorException('Problema na criação de cliente');
