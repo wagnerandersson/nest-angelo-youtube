@@ -5,8 +5,16 @@ module.exports = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  cache: {
+    type: 'redis',
+    options: {
+      host: process.env.REDIS_HOST,
+      port: 6379,
+      password: process.env.REDIS_PASSWORD,
+    },
+  },
   entities: ['dist/**/*.entity{.ts,.js}'],
-  synchronize: process.env.DB_SYNC == 'true',
+  synchronize: process.env.DB_SYNC == 'false',
   migrations: ['./src/database/migrations/**/*.ts'],
   cli: {
     migrationsDir: ['./src/database/migrations/'],
