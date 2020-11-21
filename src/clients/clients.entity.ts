@@ -7,12 +7,12 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
-import { env } from 'process';
-import * as NodeRSA from 'node-rsa';
+// import { env } from 'process';
+// import * as NodeRSA from 'node-rsa';
 
-let public_key = env.public_key;
+// let public_key = env.public_key;
 
-const key_public: NodeRSA = new NodeRSA(public_key);
+// const key_public: NodeRSA = new NodeRSA(public_key);
 
 @ObjectType()
 @Entity()
@@ -22,35 +22,35 @@ export class Clients {
   id: string;
 
   @Column({
-    transformer: {
-      to: (value: string) => key_public.encrypt(value, 'base64'),
-      from: (value: string) => value,
-    },
+    // transformer: {
+    //   to: (value: string) => key_public.encrypt(value, 'base64'),
+    //   from: (value: string) => value,
+    // },
   })
   name: string;
 
   @Column({
-    transformer: {
-      to: (value: string) => key_public.encrypt(value, 'base64'),
-      from: (value: string) => value,
-    },
+    // transformer: {
+    //   to: (value: string) => key_public.encrypt(value, 'base64'),
+    //   from: (value: string) => value,
+    // },
   })
   phone: string;
 
   @Column({
-    transformer: {
-      to: (value: string) => key_public.encrypt(value, 'base64'),
-      from: (value: string) => value,
-    },
+    // transformer: {
+    //   to: (value: string) => key_public.encrypt(value, 'base64'),
+    //   from: (value: string) => value,
+    // },
   })
   email: string;
 
   @Column({
     name: 'password',
-    transformer: {
-      to: (value: string) => key_public.encrypt(value, 'base64'),
-      from: (value: string) => value,
-    },
+    // transformer: {
+    //   to: (value: string) => key_public.encrypt(value, 'base64'),
+    //   from: (value: string) => value,
+    // },
   })
   @HideField()
   pass: string;

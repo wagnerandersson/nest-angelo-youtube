@@ -4,8 +4,9 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Clients } from 'src/clients/clients.entity';
 import { ClientsService } from 'src/clients/clients.service';
-import { UpdateClientInput } from '../clients/dto/update-client.input';
+// import { UpdateClientInput } from '../clients/dto/update-client.input';
 import { AuthInput } from './dto/auth.input';
 import { AuthType } from './dto/auth.type';
 
@@ -26,16 +27,16 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect Password');
     }
 
+    const token = await this.jwtToken(client);
+
     return {
       client,
-      token: 'token',
+      token,
     };
   }
 
-  async login(client) {
-    const payload = { name: client.name, sub: client.id };
-    return {
-      access_token: this.JTWService.sign(payload),
-    };
+  private async jwtToken(client: Clients): Promise<string> {
+    const payload = { clientname: client.name, sub: client.id };
+    return this.JTWService.signAsync(payload);
   }
 }

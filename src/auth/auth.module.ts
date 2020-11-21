@@ -4,9 +4,20 @@ import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { ClientsService } from 'src/clients/clients.service';
 import { Clients } from 'src/clients/clients.entity';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Clients])],
+  imports: [
+    TypeOrmModule.forFeature([Clients]),
+    JwtModule.registerAsync({
+      useFactory: () => ({
+        secret: process.env.JWT_SECRET,
+        signOptions: {
+          expiresIn: '5min',
+        },
+      }),
+    }),
+  ],
   providers: [AuthService, AuthResolver, ClientsService],
 })
 export class AuthModule {}
