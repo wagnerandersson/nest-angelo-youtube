@@ -29,11 +29,17 @@ export class ClientsResolver {
 
   @Query(() => Clients)
   async clientByEmail(@Args('email') email: string): Promise<Clients> {
-    //const clients = await this.clientsService.findAllClients();
+    const client = await this.clientsService.getClientByEmail(email);
+    console.log(client);
 
-    const user = await this.clientsService.getClientByEmail(email);
-    console.log(user);
+    return client;
+  }
 
-    return user;
+  @Query(() => Clients)
+  async clientsById(@Args('id') id: string): Promise<Clients> {
+    const client = await this.clientsService.findClientsById(id);
+    console.log(client);
+
+    return client;
   }
 }

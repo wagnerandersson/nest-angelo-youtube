@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { User } from './user.entity';
 import { UserService } from './user.service';
@@ -7,6 +8,7 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { env } from 'process';
 
 import * as NodeRSA from 'node-rsa';
+import { GqlAuthGuard } from 'src/auth/dto/auth.guard';
 
 const private_key = env.private_key;
 const key_private = new NodeRSA(private_key);
@@ -25,6 +27,7 @@ export class UserResolver {
     return users;
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => User)
   async user(@Args('id') id: string): Promise<User> {
     const user = await this.userService.getUserById(id);
