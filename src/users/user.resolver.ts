@@ -8,7 +8,7 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { env } from 'process';
 
 import * as NodeRSA from 'node-rsa';
-import { GqlAuthGuard } from 'src/auth/dto/auth.guard';
+import { GqlAuthGuard } from 'src/auth/auth.guard';
 
 const private_key = env.private_key;
 const key_private = new NodeRSA(private_key);

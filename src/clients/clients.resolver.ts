@@ -1,20 +1,16 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { GqlAuthGuard } from 'src/auth/auth.guard';
 
 import { Clients } from './clients.entity';
 import { ClientsService } from './clients.service';
 import { CreateClientInput } from './dto/create-client.input';
 
-// import { UpdateClientsInput } from './dto/update-client.input';
-// import * as NodeRSA from 'node-rsa';
-// import { env } from 'process';
-
-// let private_key = env.private_key;
-// const key_private = new NodeRSA(private_key);
-
 @Resolver('Clients')
 export class ClientsResolver {
   constructor(private clientsService: ClientsService) {}
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [Clients])
   async clients(): Promise<Clients[]> {
     const clients = await this.clientsService.findAllClients();
@@ -35,6 +31,7 @@ export class ClientsResolver {
     return client;
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => Clients)
   async clientsById(@Args('id') id: string): Promise<Clients> {
     const client = await this.clientsService.findClientsById(id);
